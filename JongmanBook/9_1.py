@@ -6,12 +6,12 @@ def lis(start):
     for next in range(start, l):
         if arr[start] < arr[next]:
             if cache[start] < lis(next) + 1:
+                print("      --- start : {} / next : {}".format(start, next))
+                print("     | <cache[start]> : {} / lis[next] : {}".format(cache[start], lis(next)))
+                print("     | <cache> : {}".format(cache))
+                print("     | <choices> : {}".format(choices))
                 cache[start] = lis(next) + 1
                 bestNext = next ##diff
-        print("   --- next : {}".format(next))
-        print("   | <cache> : {}".format(cache))
-        print("   | <choices> : {}".format(choices))
-
     choices[start] = bestNext ##diff
     return cache[start]
 
