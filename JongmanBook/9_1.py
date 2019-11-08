@@ -3,7 +3,7 @@ def lis(start):
         return cache[start]
     cache[start] = 1
     bestNext = -1 ##diff
-    for next in range(start, l):
+    for next in range(start+1, l):
         if arr[start] < arr[next]:
             if cache[start] < lis(next) + 1:
                 print("      --- start : {} / next : {}".format(start, next))
