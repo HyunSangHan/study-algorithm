@@ -83,3 +83,16 @@ let binarySearchTree = initBinarySearchTree(test);
 for (let i=0; i < test.length; i++) {
   binarySearchTree.contains(test[i]);
 }
+
+
+// 정렬된 배열로 뽑기 : 중위 순회
+function inOrderTree (node) {
+  if (!node) return;
+  inOrderTree(node.left);
+  sortedArr.push(node.data);
+  inOrderTree(node.right);
+}
+
+let sortedArr = [];
+inOrderTree(binarySearchTree.root);
+console.log(sortedArr)
