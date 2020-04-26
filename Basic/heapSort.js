@@ -9,7 +9,7 @@ function heapSort (arr) {
   for (let i=0; i < arr.length; i++) {
     resultArr.push(heap.delete()); // heap의 data중 첫번째 요소를 꺼냄
   }
-  return resultArr.slice(1); // heap의 첫 요소는 null이므로 불필요하여 제외
+  return resultArr; // heap의 첫 요소는 null이므로 불필요하여 제외
 }
 
 function Heap () {
@@ -23,9 +23,12 @@ function Heap () {
   }
 
   this.delete = function () {
-    const minValue = this.data.shift(); // data배열 첫번째 요소를 꺼냈으니
-    this.size--; // 사이즈가 하나 작아지고
-    this.heapifyToDown(1); // 아래로 내려가는 방향의 heapify를 한다.
+    let tmpData = this.data.slice(1); // 잠시 맨 앞의 null을 떼어내고
+    const minValue = tmpData.shift(); // data배열의 실질적인 첫번째 요소를 꺼냈으니
+    this.size--; // 사이즈가 하나 작아짐
+    tmpData.unshift(null); // 떼어냈던 null은 다시 붙여주고
+    this.data = tmpData; // data를 업데이트
+    this.heapifyToDown(1); // 루트노트부터 아래로 내려가는 방향의 heapify를 한다.
     return minValue; // 꺼낸 첫번째 요소(즉, 최소힙에서는 min값)는 return해준다.
   }
 
