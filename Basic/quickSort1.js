@@ -1,10 +1,8 @@
 function quickSort (arr) {
-  if (arr.length < 2) {
-    return arr;
-  }
-  const pivot = [arr[0]];
+  if (arr < 2) return arr;
   let left = [];
   let right = [];
+  let pivot = [arr[0]];
 
   for (let i=1; i < arr.length; i++) {
     if (arr[i] < pivot[0]) {
@@ -15,7 +13,6 @@ function quickSort (arr) {
       pivot.push(arr[i]);
     }
   }
-
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
