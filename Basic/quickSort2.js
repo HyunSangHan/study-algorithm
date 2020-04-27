@@ -2,7 +2,7 @@ function quickSort (arr, startIdx =0, endIdx =arr.length-1) {
   if (startIdx >= endIdx) { // 시작점과 끝점이 교차되는 순간 재귀호출을 끝낸다.
     return;
   }
-  const pivotIdx = divideWithSort(arr, startIdx, endIdx)
+  const pivotIdx = partition(arr, startIdx, endIdx)
 
   quickSort(arr, startIdx, pivotIdx); // 피벗의 왼쪽 부분 재귀
   quickSort(arr, pivotIdx+1, endIdx); // 피벗의 오른쪽 부분 재귀
@@ -10,7 +10,7 @@ function quickSort (arr, startIdx =0, endIdx =arr.length-1) {
   return arr;
 }
 
-function divideWithSort(arr, startIdx, endIdx) {
+function partition (arr, startIdx, endIdx) {
   const pivot = arr[startIdx]; // 편의상 이 퀵정렬 대상 배열의 첫번째 요소를 pivot으로 삼았다.
   let leftIdx = startIdx + 1; // 이미 pivot이 startIdx를 가져가버렸으므로 그 다음부터로 시작점을 새로 잡는다.
   let rightIdx = endIdx; // endIdx에는 영향이 없지만 가독성 차원에서 변수명을 통일했다.
@@ -27,8 +27,7 @@ function divideWithSort(arr, startIdx, endIdx) {
     }
   }
 
-  [arr[startIdx], arr[rightIdx]] = [arr[rightIdx], arr[startIdx]]; // 파티셔닝이 끝났으면, 맨 앞에 있던 pivot이 가운데로 들어올 차례이다.
-
+  [arr[startIdx], arr[rightIdx]] = [arr[rightIdx], arr[startIdx]]; // 파티셔닝이 끝났으면, 맨 앞에 있던 pivot이 가운데로 들어올 차례이다. 현 시점에서 leftIdx와 rightIdx는 이미 교차되어버린 상태라, leftIdx가 아닌 더 왼쪽에 있는 rightIdx를 택해야만 옳다.
   const pivotIdx = rightIdx;
   return pivotIdx;
 }
